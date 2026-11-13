@@ -25,7 +25,7 @@ export const personalData: PersonalInfo = {
   availabilityNote: "Open to Frontend Developer opportunities",
   bio: "I am a Frontend Developer passionate about building modern, responsive, and user-friendly web applications using React, Next.js, and TypeScript.",
   location: "Ho Chi Minh City, Vietnam",
-  avatarUrl: "/images/IDPhoto.jpg",
+  avatarUrl: "/images/Avatar.jpg",
   email: "trinc304@gmail.com",
   cvUrl: "/pdf/CV_NguyenCongTri.pdf",
   cvFileName: "CV_NguyenCongTri.pdf",
