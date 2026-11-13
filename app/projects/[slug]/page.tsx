@@ -62,7 +62,7 @@ export default async function ProjectDetailPage({
 
   return (
     <div className="min-h-screen text-zinc-900 antialiased selection:bg-zinc-200 selection:text-zinc-900 pb-20">
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 pt-6 sm:pt-10 space-y-6 sm:space-y-8">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10 space-y-6 sm:space-y-8">
         {/* Project Hero (Title, Badges, Specs, Preview Mockup, Actions) */}
         <ProjectHero project={project} />
 

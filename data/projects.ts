@@ -99,7 +99,7 @@ export const defaultProjects: Project[] = [
         title: "Intelligent Feng Shui Recommender",
         description:
           "Algorithmic analysis matching user birth elements (Metal, Wood, Water, Fire, Earth) and workspace directional light to the ideal plant species and pot materials.",
-        tag: "AI Engine",
+      tag: "AI Engine",
       },
       {
         title: "Conversational AI Consultant",
@@ -179,6 +179,30 @@ export const defaultProjects: Project[] = [
           "Interactive store interface with comprehensive plant details and instant checkout triggers.",
         title: "Storefront Overview",
       },
+      {
+        url: "/images/fengdesk.io.vn_products_1.png",
+        caption:
+          "Detail Product Page with responsive design for smartphones, tablets, and desktop displays.",
+        title: "Detail Product Page",
+      },
+      {
+        url: "/images/fengdesk.io.vn_products_2.png",
+        caption:
+          "3D plant inspection with 360-degree rotation, scale adjustments, and realistic rendering to preview how the plant complements your workspace before ordering.",
+        title: "3D Plant Visualization",
+      },
+      {
+        url: "/images/fengdesk.io.vn_products_3.png",
+        caption:
+          "AI Chatbot Interface with AI Engine",
+        title: "AI Chatbot",
+      },
+      {
+        url: "/images/fengdesk.io.vn_checkout.png",
+        caption:
+          "Interactive store interface with comprehensive plant details and instant checkout triggers.",
+        title: "Checkout",
+      }
     ],
     challenges: [
       {

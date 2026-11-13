@@ -6,8 +6,14 @@ export type StackIconKey =
   | "redux"
   | "nodejs"
   | "mongodb"
-  | "git";
-
+  | "git"
+  | "figma"
+  | "html"
+  | "css"
+  | "javascript"
+  | "cplusplus"
+  | "java"
+  | "mysql";
 export interface StackItem {
   id: string;
   name: string;
@@ -67,10 +73,59 @@ export const stackItems: StackItem[] = [
     url: "https://www.mongodb.com/",
   },
   {
+    id: "mysql",
+    name: "MySQL",
+    category: "Database",
+    icon: "mysql",
+    url: "https://www.mysql.com/",
+  },
+  {
     id: "git",
     name: "Git",
     category: "Version Control",
     icon: "git",
     url: "https://git-scm.com/",
+  },
+  {
+    id: "html",
+    name: "HTML5",
+    category: "Markup Language",
+    icon: "html",
+    url: "https://www.w3.org/html/",
+  },
+  {
+    id: "css",
+    name: "CSS3",
+    category: "Style Sheet Language",
+    icon: "css",
+    url: "https://www.w3.org/Style/CSS/Overview.en.html",
+  },
+  {
+    id: "javascript",
+    name: "JavaScript",
+    category: "Programming Language",
+    icon: "javascript",
+    url: "https://www.javascript.com/",
+  },
+  {
+    id: "cplusplus",
+    name: "C++",
+    category: "Programming Language",
+    icon: "cplusplus",
+    url: "https://www.cplusplus.com/",
+  },
+  {
+    id: "java",
+    name: "Java",
+    category: "Programming Language",
+    icon: "java",
+    url: "https://www.java.com/",
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    category: "UI/UX Design",
+    icon: "figma",
+    url: "https://www.figma.com/",
   },
 ];
