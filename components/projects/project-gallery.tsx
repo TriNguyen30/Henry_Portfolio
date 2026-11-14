@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { Images, Maximize2, X } from "lucide-react";
@@ -21,6 +22,23 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<ProjectGalleryItem | null>(
     null
   );
+
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedImage(null);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedImage]);
 
   if (!gallery || gallery.length === 0) return null;
 
@@ -96,56 +114,63 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
       </motion.section>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={SPRING_GENTLE}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-5xl w-full bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl border border-zinc-800"
-            >
-              {/* Close Button */}
-              <button
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {selectedImage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 onClick={() => setSelectedImage(null)}
-                aria-label="Close preview"
-                className="absolute top-4 right-4 z-10 size-9 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white flex items-center justify-center transition-colors cursor-pointer"
+                className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center overflow-y-auto overscroll-contain p-4 sm:p-8"
               >
-                <X className="size-4.5" />
-              </button>
+                <motion.div
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.95, opacity: 0 }}
+                  transition={SPRING_GENTLE}
+                  onClick={(e) => e.stopPropagation()}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={selectedImage.title || "Image preview"}
+                  className="relative my-auto w-full max-w-5xl max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-y-auto bg-zinc-950 rounded-2xl shadow-2xl border border-zinc-800"
+                >
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    aria-label="Close preview"
+                    className="absolute top-4 right-4 z-10 size-9 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <X className="size-4.5" />
+                  </button>
 
-              <div className="relative aspect-[16/10] w-full bg-zinc-900">
-                <Image
-                  src={selectedImage.url}
-                  alt={selectedImage.caption}
-                  fill
-                  className="object-contain"
-                />
-              </div>
+                  <div className="relative aspect-[16/10] w-full bg-zinc-900">
+                    <Image
+                      src={selectedImage.url}
+                      alt={selectedImage.caption}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
 
-              <div className="p-4 sm:p-5 bg-zinc-900 border-t border-zinc-800">
-                {selectedImage.title && (
-                  <h4 className="text-sm font-semibold text-white">
-                    {selectedImage.title}
-                  </h4>
-                )}
-                <p className="text-xs text-zinc-400 mt-1">
-                  {selectedImage.caption}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+                  <div className="p-4 sm:p-5 bg-zinc-900 border-t border-zinc-800">
+                    {selectedImage.title && (
+                      <h4 className="text-sm font-semibold text-white">
+                        {selectedImage.title}
+                      </h4>
+                    )}
+                    <p className="text-xs text-zinc-400 mt-1">
+                      {selectedImage.caption}
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </>
   );
 }

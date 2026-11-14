@@ -137,7 +137,6 @@ export const defaultProjects: Project[] = [
         category: "Frontend Architecture",
         technologies: [
           "ReactJS",
-          "Next.js",
           "TypeScript",
           "Tailwind CSS",
           "Motion",
@@ -237,9 +236,9 @@ export const defaultProjects: Project[] = [
     ],
     imageUrl: "/images/rescue-aid.vercel.app_map.png",
     projectUrl: "https://rescue-aid.vercel.app/",
-    role: "Frontend Developer",
+    role: "Lead Frontend Developer",
     timeline: "3 Months • 2026",
-    team: "3 Members (Frontend, Backend & Mobile)",
+    team: "4 Members (Frontend, Backend & Mobile)",
     platform: "Mission-Critical Web & Mobile Application",
     deliverables: [
       "Interactive Incident Map",
@@ -299,7 +298,6 @@ export const defaultProjects: Project[] = [
         technologies: [
           "ReactJS",
           "TypeScript",
-          "Next.js",
           "Tailwind CSS",
           "Motion",
         ],
@@ -307,16 +305,14 @@ export const defaultProjects: Project[] = [
       {
         category: "Mapping & Geospatial",
         technologies: [
-          "Leaflet / Mapbox",
+          "Vietmap",
           "Geolocation API",
-          "OpenStreetMap",
           "GeoJSON",
         ],
       },
       {
         category: "Data & State Flow",
         technologies: [
-          "TanStack Query",
           "Axios",
           "RESTful APIs",
           "WebSocket / Real-time",
