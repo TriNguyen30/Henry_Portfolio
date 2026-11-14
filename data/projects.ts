@@ -61,6 +61,7 @@ export const defaultProjects: Project[] = [
   {
     id: "fengdesk",
     title: "FengDesk AI",
+    featured: true,
     subtitle:
       "Intelligent Workspace Feng Shui Plant Recommendation & E-Commerce Platform",
     category: "Web App",
@@ -99,7 +100,7 @@ export const defaultProjects: Project[] = [
         title: "Intelligent Feng Shui Recommender",
         description:
           "Algorithmic analysis matching user birth elements (Metal, Wood, Water, Fire, Earth) and workspace directional light to the ideal plant species and pot materials.",
-      tag: "AI Engine",
+        tag: "AI Engine",
       },
       {
         title: "Conversational AI Consultant",
@@ -348,4 +349,179 @@ export const defaultProjects: Project[] = [
       },
     ],
   },
+
+  {
+    id: "green-space",
+    title: "Green Space",
+    subtitle: "AI-Powered Plant Care & Sustainability Platform",
+    category: "Academic Project",
+
+    description:
+      "An academic entrepreneurship project focused on combining AI technology and sustainability to create a smarter plant care experience. Green Space provides users with an AI-powered chatbot for plant care consultation and practical guidance.",
+
+    tags: [
+      "Artificial Intelligence",
+      "Plant Care",
+      "Sustainability",
+      "AI Chatbot",
+    ],
+
+    imageUrl: "/images/greenspace.io.vn_.png",
+    projectUrl: "https://green-space.vercel.app/",
+
+    role: "Lead Frontend Developer",
+    timeline: "3 Months • 2026",
+    team: "4 Members (Frontend, Backend & Mobile)",
+    platform: "Responsive Web Application",
+
+    deliverables: [
+      "Responsive Web Application",
+      "AI-Powered Plant Care Chatbot",
+      "Plant Care Consultation Interface",
+      "Sustainability-Focused Digital Experience",
+    ],
+
+    overview: {
+      problem:
+        "Many plant enthusiasts, especially beginners, struggle to find suitable plant care guidance and reliable information. Understanding watering requirements, lighting conditions, and proper plant maintenance can be challenging without accessible consultation.",
+
+      solution:
+        "Green Space is an entrepreneurship project that explores the use of AI technology in plant care. The platform integrates an AI-powered chatbot that allows users to ask plant-related questions and receive conversational guidance and recommendations.",
+
+      impact:
+        "Demonstrates how AI technology can be applied to everyday plant care needs, providing a more accessible consultation experience and promoting interest in sustainable living.",
+    },
+
+    features: [
+      {
+        title: "AI-Powered Plant Care Assistant",
+        description:
+          "An AI-powered chatbot that helps users with plant care consultation, answers plant-related questions, and provides guidance on watering, lighting, and general plant maintenance.",
+        tag: "AI Integration",
+      },
+      {
+        title: "Interactive AI Chatbox",
+        description:
+          "Provides a conversational interface where users can submit natural language questions and receive AI-generated responses for plant care consultation.",
+        tag: "AI Chatbot",
+      },
+      {
+        title: "Plant Care Information",
+        description:
+          "Presents plant-related information and care guidance to help users better understand plant maintenance and develop healthier gardening habits.",
+        tag: "Plant Care",
+      },
+      {
+        title: "Responsive User Interface",
+        description:
+          "Provides a clean, nature-inspired interface with responsive layouts and interactive elements for a consistent experience across devices.",
+        tag: "Frontend",
+      },
+    ],
+
+    techStack: [
+      {
+        category: "Frontend Core",
+        technologies: [
+          "ReactJS",
+          "TypeScript",
+          "Tailwind CSS",
+        ],
+      },
+      {
+        category: "AI Integration",
+        technologies: [
+          "OpenAI API",
+          "Natural Language Processing",
+        ],
+      },
+      {
+        category: "State & Data Fetching",
+        technologies: [
+          "Redux Toolkit",
+          "TanStack Query",
+          "Axios",
+          "REST APIs",
+        ],
+      },
+      {
+        category: "Interactive & AI",
+        technologies: [
+          "AI Chatbot Integration",
+          "PayOS Payment",
+          "Email OTP",
+        ],
+      },
+    ],
+
+    gallery: [
+      {
+        url: "/images/greenspace.io.vn_.png",
+        caption:
+          "Green Space landing page introducing the plant care platform and its AI-powered consultation experience.",
+        title: "Home Page",
+      },
+    ],
+
+    challenges: [
+      {
+        title: "Integrating AI-Powered Plant Care Consultation",
+        description:
+          "Integrating an AI chatbot into the platform while ensuring that users can easily ask plant-related questions and receive relevant responses.",
+
+        solution:
+          "Integrated the OpenAI API to support natural language conversations, allowing users to interact with the AI assistant through a dedicated plant care chatbox.",
+      },
+      {
+        title: "Designing an Intuitive AI Chat Experience",
+        description:
+          "Creating a conversational interface that is easy to use while maintaining visual consistency with the platform's nature-inspired design.",
+
+        solution:
+          "Developed a responsive chat interface using ReactJS, TypeScript, and Tailwind CSS, with Motion to enhance interactions and improve the overall user experience.",
+      },
+      {
+        title: "Leading Frontend Development",
+        description:
+          "Coordinating frontend development within a four-member team while ensuring consistency across the application's components and user interfaces.",
+
+        solution:
+          "Took responsibility for frontend development, component organization, and UI implementation while collaborating with backend and mobile team members.",
+      },
+    ],
+  },
+  {
+    id: "quiz-app",
+    title: "QuizBank",
+    subtitle: "Quiz & Question Management Application",
+    category: "Personal Project",
+    description:
+      "A lightweight quiz management application built with the MERN stack, allowing users to manage quiz-related data through CRUD operations.",
+    tags: ["MERN Stack", "CRUD", "Quiz Management", "MongoDB"],
+    imageUrl: "/images/quizbankv1.vercel.app_.png",
+    projectUrl: "https://quizbankv1.vercel.app/",
+    role: "Full Stack Developer",
+    timeline: "1 Months • 2025",
+    team: "Solo Project",
+    platform: "Responsive Web Application",
+    deliverables: [
+      "Responsive Web Application",
+      "Quiz Management System",
+      "CRUD Functionality",
+    ],
+    techStack: [
+      {
+        category: "Frontend",
+        technologies: ["React.js"],
+      },
+      {
+        category: "Backend",
+        technologies: ["Node.js", "Express.js"],
+      },
+      {
+        category: "Database",
+        technologies: ["MongoDB"],
+      },
+    ],
+  }
 ];

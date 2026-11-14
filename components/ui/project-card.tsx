@@ -3,8 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight, ArrowRight, Star } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { SPRING_GENTLE } from "@/lib/animations";
 
@@ -12,21 +12,22 @@ export type { Project };
 
 export interface ProjectCardProps {
   project: Project;
+  className?: string;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, className = "" }: ProjectCardProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
       transition={SPRING_GENTLE}
       whileHover={{
         y: -5,
         boxShadow: "0 14px 30px -8px rgba(0, 0, 0, 0.08)",
       }}
-      className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200/75 bg-white p-4 sm:p-5 hover:border-zinc-300 transition-colors duration-200"
+      className={`group relative flex flex-col justify-between rounded-2xl border border-zinc-200/75 bg-white p-4 sm:p-5 hover:border-zinc-300 transition-colors duration-200 ${className}`}
     >
       <div>
         {/* Project Thumbnail / Preview (Links to detail) */}
@@ -47,6 +48,38 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 {project.category}
               </span>
             </div>
+          )}
+
+          {/* Featured Star Badge */}
+          {project.featured && (
+            <motion.span
+              initial={
+                prefersReducedMotion
+                  ? false
+                  : { opacity: 0, scale: 0.6, y: -4 }
+              }
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ ...SPRING_GENTLE, delay: 0.2 }}
+              className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 rounded-full border border-amber-200/60 bg-amber-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-amber-600 shadow-xs"
+            >
+              <motion.span
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : { rotate: [0, 14, -8, 0], scale: [1, 1.12, 1] }
+                }
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  repeatDelay: 2.2,
+                  ease: "easeInOut",
+                }}
+                className="flex"
+              >
+                <Star className="size-3 fill-current" />
+              </motion.span>
+              Featured
+            </motion.span>
           )}
 
           {/* Quick External Link Indicator */}
