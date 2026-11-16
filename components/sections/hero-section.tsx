@@ -168,7 +168,7 @@ export function HeroSection({
           variants={fadeInUpVariants}
           className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight mt-6"
         >
-          Hey! I&apos;m {name}.
+          Hi! I&apos;m {name}.
         </motion.h2>
 
         <motion.h1
@@ -181,7 +181,7 @@ export function HeroSection({
         {/* Bio */}
         <motion.p
           variants={fadeInUpVariants}
-          className="max-w-2xl text-xs sm:text-sm md:text-base text-zinc-500 leading-relaxed mt-4 font-normal"
+          className="max-w-4xl text-xs sm:text-sm md:text-base text-zinc-500 leading-relaxed mt-4 font-normal"
         >
           {bio}
         </motion.p>
