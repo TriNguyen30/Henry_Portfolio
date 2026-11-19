@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { Wrench, ShieldAlert, CheckCircle } from "lucide-react";
 import { ProjectChallenge } from "@/data/projects";
@@ -16,6 +17,8 @@ export interface ProjectChallengesProps {
 }
 
 export function ProjectChallenges({ challenges }: ProjectChallengesProps) {
+  const t = useTranslations("ProjectDetail");
+
   if (!challenges || challenges.length === 0) return null;
 
   return (
@@ -32,10 +35,10 @@ export function ProjectChallenges({ challenges }: ProjectChallengesProps) {
         </div>
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
-            Engineering Challenges & Solutions
+            {t("challengesTitle")}
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-            Key architectural bottlenecks encountered during development and how they were resolved
+            {t("challengesSubtitle")}
           </p>
         </div>
       </div>
@@ -62,7 +65,7 @@ export function ProjectChallenges({ challenges }: ProjectChallengesProps) {
                   <ShieldAlert className="size-4 text-amber-500 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-zinc-900 block text-[11px] uppercase tracking-wider text-amber-600 mb-0.5">
-                      Challenge
+                      {t("challenge")}
                     </span>
                     <span>{item.description}</span>
                   </div>
@@ -72,7 +75,7 @@ export function ProjectChallenges({ challenges }: ProjectChallengesProps) {
                   <CheckCircle className="size-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-zinc-900 block text-[11px] uppercase tracking-wider text-emerald-600 mb-0.5">
-                      Solution
+                      {t("solution")}
                     </span>
                     <span>{item.solution}</span>
                   </div>
@@ -87,4 +90,3 @@ export function ProjectChallenges({ challenges }: ProjectChallengesProps) {
 }
 
 export default ProjectChallenges;
-

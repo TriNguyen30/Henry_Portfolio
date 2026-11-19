@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Link from "next/link";
 import emailjs from "@emailjs/browser";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Mail,
@@ -20,6 +20,7 @@ import {
   SPRING_GENTLE,
 } from "@/lib/animations";
 import { personalData } from "@/data/personal";
+import { useContent } from "@/components/providers/content-provider";
 
 export interface ContactSectionProps {
   email?: string;
@@ -32,6 +33,8 @@ export function ContactSection({
   telegram,
   calLink,
 }: ContactSectionProps) {
+  const t = useTranslations("Contact");
+  const { personal } = useContent();
   const formRef = useRef<HTMLFormElement>(null);
 
   const [copied, setCopied] = useState(false);
@@ -50,14 +53,12 @@ export function ContactSection({
       }, 2000);
     } catch (err) {
       console.error("Copy email failed:", err);
-      setError("Unable to copy email. Please copy it manually.");
+      setError(t("errors.copy"));
     }
   };
 
   // Send contact form using EmailJS
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formRef.current || isSending) return;
@@ -67,14 +68,9 @@ export function ContactSection({
     setError("");
 
     try {
-      const serviceId =
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-
-      const templateId =
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-
-      const publicKey =
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error(
@@ -82,27 +78,19 @@ export function ContactSection({
         );
       }
 
-      await emailjs.sendForm(
-        serviceId,
-        templateId,
-        formRef.current,
-        {
-          publicKey,
-          limitRate: {
-            id: "portfolio-contact",
-            throttle: 10000,
-          },
-        }
-      );
+      await emailjs.sendForm(serviceId, templateId, formRef.current, {
+        publicKey,
+        limitRate: {
+          id: "portfolio-contact",
+          throttle: 10000,
+        },
+      });
 
       setSubmitted(true);
       formRef.current.reset();
     } catch (err) {
       console.error("EmailJS Error:", err);
-
-      setError(
-        "Something went wrong. Please try again later or contact me directly via email."
-      );
+      setError(t("errors.generic"));
     } finally {
       setIsSending(false);
     }
@@ -123,7 +111,7 @@ export function ContactSection({
           variants={fadeInUpVariants}
           className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight"
         >
-          Get in Touch
+          {t("title")}
         </motion.h2>
 
         <motion.div
@@ -132,13 +120,13 @@ export function ContactSection({
           whileTap={{ scale: 0.96 }}
           transition={SPRING_GENTLE}
         >
-          <Link
+          <a
             href={`mailto:${email}`}
             className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 px-3.5 py-1.5 rounded-full transition-colors duration-200 hover:shadow-xs group shrink-0"
           >
-            <span>Direct Email</span>
+            <span>{t("directEmail")}</span>
             <ArrowRight className="size-3 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
+          </a>
         </motion.div>
       </div>
 
@@ -151,14 +139,11 @@ export function ContactSection({
         >
           <div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight leading-snug">
-              Let&apos;s build something great together.
+              {t("heading")}
             </h3>
 
             <p className="mt-3 text-xs sm:text-sm text-zinc-500 leading-relaxed">
-              Whether you have a project idea, a collaboration
-              opportunity, or simply want to connect, I&apos;d love
-              to hear from you. Let&apos;s create something meaningful
-              together.
+              {t("description")}
             </p>
 
             {/* Email Copy Card */}
@@ -175,7 +160,7 @@ export function ContactSection({
 
                 <div className="flex flex-col min-w-0">
                   <span className="text-[11px] text-zinc-400 font-medium">
-                    EMAIL
+                    {t("emailLabel")}
                   </span>
 
                   <span className="text-xs sm:text-sm font-semibold text-zinc-900 truncate">
@@ -191,8 +176,8 @@ export function ContactSection({
                 whileTap={{ scale: 0.9 }}
                 transition={SPRING_GENTLE}
                 className="p-2 rounded-xl text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200/60 transition-colors cursor-pointer shrink-0"
-                title="Copy Email"
-                aria-label="Copy Email"
+                title={t("copyEmail")}
+                aria-label={t("copyEmail")}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {copied ? (
@@ -227,7 +212,7 @@ export function ContactSection({
                 whileTap={{ scale: 0.99 }}
                 transition={SPRING_GENTLE}
               >
-                <Link
+                <a
                   href={telegram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -239,15 +224,15 @@ export function ContactSection({
 
                   <div className="flex-1 min-w-0">
                     <span className="block text-[11px] text-zinc-400 font-medium">
-                      TELEGRAM
+                      {t("telegramLabel")}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-zinc-900">
-                      Let&apos;s chat on Telegram
+                      {t("telegramCta")}
                     </span>
                   </div>
 
                   <ArrowRight className="size-4 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </motion.div>
             )}
           </div>
@@ -258,20 +243,20 @@ export function ContactSection({
               <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
 
               <span className="text-xs font-medium text-zinc-600">
-                {personalData.availabilityNote}
+                {personal.availabilityNote}
               </span>
             </div>
 
             {calLink && (
-              <Link
+              <a
                 href={calLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-800 hover:text-zinc-950 underline underline-offset-4"
               >
                 <CalendarDays className="size-3.5" />
-                Book a Call ↗
-              </Link>
+                {t("bookCall")}
+              </a>
             )}
           </div>
         </motion.div>
@@ -293,7 +278,7 @@ export function ContactSection({
               htmlFor="contact-name"
               className="block text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mb-1"
             >
-              Your Name
+              {t("form.name")}
             </label>
 
             <input
@@ -304,7 +289,7 @@ export function ContactSection({
               minLength={2}
               maxLength={100}
               autoComplete="name"
-              placeholder="e.g. John Doe"
+              placeholder={t("form.namePlaceholder")}
               className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent transition-all"
             />
           </div>
@@ -315,7 +300,7 @@ export function ContactSection({
               htmlFor="contact-email"
               className="block text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mb-1"
             >
-              Your Email
+              {t("form.email")}
             </label>
 
             <input
@@ -325,7 +310,7 @@ export function ContactSection({
               required
               maxLength={254}
               autoComplete="email"
-              placeholder="e.g. john@example.com"
+              placeholder={t("form.emailPlaceholder")}
               className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent transition-all"
             />
           </div>
@@ -336,7 +321,7 @@ export function ContactSection({
               htmlFor="contact-subject"
               className="block text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mb-1"
             >
-              Subject
+              {t("form.subject")}
             </label>
 
             <input
@@ -346,7 +331,7 @@ export function ContactSection({
               required
               minLength={3}
               maxLength={150}
-              placeholder="e.g. Project Collaboration"
+              placeholder={t("form.subjectPlaceholder")}
               className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent transition-all"
             />
           </div>
@@ -357,7 +342,7 @@ export function ContactSection({
               htmlFor="contact-message"
               className="block text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mb-1"
             >
-              Your Message
+              {t("form.message")}
             </label>
 
             <textarea
@@ -367,7 +352,7 @@ export function ContactSection({
               required
               minLength={10}
               maxLength={3000}
-              placeholder="Tell me about your project..."
+              placeholder={t("form.messagePlaceholder")}
               className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent transition-all resize-none"
             />
           </div>
@@ -399,10 +384,7 @@ export function ContactSection({
                 className="flex items-start gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-xl p-3 overflow-hidden"
               >
                 <Check className="size-4 shrink-0" />
-                <p>
-                  Thank you! Your message has been sent successfully.
-                  I&apos;ll get back to you soon.
-                </p>
+                <p>{t("success")}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -426,7 +408,7 @@ export function ContactSection({
                   className="inline-flex items-center gap-2"
                 >
                   <Loader2 className="size-4 animate-spin" />
-                  <span>Sending...</span>
+                  <span>{t("form.sending")}</span>
                 </motion.span>
               ) : submitted ? (
                 <motion.span
@@ -437,7 +419,7 @@ export function ContactSection({
                   className="inline-flex items-center gap-2"
                 >
                   <Check className="size-4" />
-                  <span>Message Sent!</span>
+                  <span>{t("form.sent")}</span>
                 </motion.span>
               ) : (
                 <motion.span
@@ -448,14 +430,14 @@ export function ContactSection({
                   className="inline-flex items-center gap-2"
                 >
                   <Send className="size-3.5" />
-                  <span>Send Message</span>
+                  <span>{t("form.send")}</span>
                 </motion.span>
               )}
             </AnimatePresence>
           </motion.button>
 
           <p className="text-[10px] text-zinc-400 text-center leading-relaxed">
-            Your information will only be used to respond to your inquiry.
+            {t("form.privacy")}
           </p>
         </motion.form>
       </div>

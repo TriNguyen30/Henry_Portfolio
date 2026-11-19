@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
 import { SPRING_GENTLE } from "@/lib/animations";
 import { personalData } from "@/data/personal";
 
 export function Footer() {
+  const t = useTranslations("Footer");
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -22,20 +24,20 @@ export function Footer() {
       <div className="flex items-center gap-2">
         <span className="font-medium text-zinc-600">{personalData.name}</span>
         <span>•</span>
-        <span>© {new Date().getFullYear()} All rights reserved.</span>
+        <span>{t("rights", { year: new Date().getFullYear() })}</span>
       </div>
 
       <div className="flex items-center gap-4">
-        <span>Designed & Developed with Care</span>
+        <span>{t("designed")}</span>
         <motion.button
           onClick={scrollToTop}
           whileHover={{ scale: 1.08, y: -2 }}
           whileTap={{ scale: 0.94 }}
           transition={SPRING_GENTLE}
           className="flex items-center gap-1 text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer"
-          aria-label="Back to top"
+          aria-label={t("backToTop")}
         >
-          <span>Top</span>
+          <span>{t("top")}</span>
           <ArrowUp className="size-3" />
         </motion.button>
       </div>

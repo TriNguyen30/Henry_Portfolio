@@ -1,0 +1,153 @@
+{
+  "Metadata": {
+    "homeTitle": "Portfolio | {name}",
+    "homeDescription": "Portfolio of {name}, a {role} building modern, responsive web applications with React, Next.js, and TypeScript.",
+    "projectsTitle": "Projects – {name} | {role}",
+    "projectsDescription": "Explore featured frontend projects, web applications, and digital experiences developed by {name}.",
+    "projectTitle": "{project} – Case Study | {name}",
+    "projectNotFound": "Project Not Found – {name}"
+  },
+  "Nav": {
+    "ariaLabel": "Floating navigation",
+    "home": "Home",
+    "about": "About",
+    "stack": "Stack",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "LanguageSwitcher": {
+    "label": "Language",
+    "english": "English",
+    "vietnamese": "Tiếng Việt",
+    "switchTo": "Switch to {language}"
+  },
+  "Theme": {
+    "switchToLight": "Switch to light theme",
+    "switchToDark": "Switch to dark theme"
+  },
+  "Hero": {
+    "greeting": "Hi! I'm {name}.",
+    "moreAbout": "More about Me"
+  },
+  "About": {
+    "title": "About Me",
+    "downloadCv": "Download CV"
+  },
+  "Stack": {
+    "title": "Stack",
+    "viewAll": "View All",
+    "modalSubtitle": "{count} tools & technologies I work with",
+    "close": "Close stack"
+  },
+  "Projects": {
+    "title": "Selected Projects",
+    "subtitle": "Handcrafted digital experiences, design systems, and product solutions",
+    "allProjects": "All Projects",
+    "backToHome": "Back to Home",
+    "categories": {
+      "all": "All",
+      "webApp": "Web App",
+      "academic": "Academic Project",
+      "personal": "Personal Project"
+    },
+    "featured": "Featured",
+    "detail": "Detail",
+    "live": "Live",
+    "previousProject": "Previous project",
+    "nextProject": "Next project"
+  },
+  "ProjectDetail": {
+    "backToProjects": "Back to Projects",
+    "home": "Home",
+    "breadcrumbProjects": "Projects",
+    "productionReady": "Production Ready",
+    "visitLive": "Visit Live Application",
+    "sourceCode": "Source Code",
+    "discussProject": "Discuss Project",
+    "specs": {
+      "role": "Role",
+      "timeline": "Timeline",
+      "team": "Team",
+      "platform": "Platform"
+    },
+    "defaultTeam": "Independent Project",
+    "defaultPlatform": "Web Application",
+    "overviewTitle": "Project Overview",
+    "overviewSubtitle": "Understanding the problem space, architectural execution, and results",
+    "overviewCards": {
+      "problem": "The Problem",
+      "problemPill": "Challenge",
+      "solution": "The Solution",
+      "solutionPill": "Architecture & Approach",
+      "impact": "The Impact",
+      "impactPill": "Outcomes & Value"
+    },
+    "featuresTitle": "Key Features & Capabilities",
+    "featuresSubtitle": "Designed for performance, intuitive workflows, and modern aesthetics",
+    "featureReady": "Production ready",
+    "techTitle": "Technologies & Architecture",
+    "techSubtitle": "The technical stack and tools chosen to build a performant, scalable system",
+    "galleryTitle": "Visual Showcase",
+    "gallerySubtitle": "High-resolution screens and interactive interface walkthroughs",
+    "galleryImageAlt": "{project} screenshot",
+    "imagePreview": "Image preview",
+    "closePreview": "Close preview",
+    "challengesTitle": "Engineering Challenges & Solutions",
+    "challengesSubtitle": "Key architectural bottlenecks encountered during development and how they were resolved",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "prevProject": "Previous Project",
+    "nextProject": "Next Project",
+    "cta": {
+      "eyebrow": "Interested in working together?",
+      "title": "Let's build your next digital product.",
+      "description": "Whether you need a dedicated {role} or want to discuss architectural ideas, my inbox is always open.",
+      "button": "Get in Touch"
+    }
+  },
+  "Experience": {
+    "title": "Experience",
+    "linkedinProfile": "LinkedIn Profile"
+  },
+  "Contact": {
+    "title": "Get in Touch",
+    "directEmail": "Direct Email",
+    "heading": "Let's build something great together.",
+    "description": "Whether you have a project idea, a collaboration opportunity, or simply want to connect, I'd love to hear from you. Let's create something meaningful together.",
+    "emailLabel": "EMAIL",
+    "copyEmail": "Copy Email",
+    "telegramLabel": "TELEGRAM",
+    "telegramCta": "Let's chat on Telegram",
+    "bookCall": "Book a Call ↗",
+    "form": {
+      "name": "Your Name",
+      "namePlaceholder": "e.g. John Doe",
+      "email": "Your Email",
+      "emailPlaceholder": "e.g. john@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "e.g. Project Collaboration",
+      "message": "Your Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "sending": "Sending...",
+      "sent": "Message Sent!",
+      "send": "Send Message",
+      "privacy": "Your information will only be used to respond to your inquiry."
+    },
+    "errors": {
+      "copy": "Unable to copy email. Please copy it manually.",
+      "generic": "Something went wrong. Please try again later or contact me directly via email."
+    },
+    "success": "Thank you! Your message has been sent successfully. I'll get back to you soon."
+  },
+  "Footer": {
+    "rights": "© {year} All rights reserved.",
+    "designed": "Designed & Developed with Care",
+    "top": "Top",
+    "backToTop": "Back to top"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  }
+}

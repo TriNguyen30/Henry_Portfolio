@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { Code2 } from "lucide-react";
 import { ProjectTechCategory } from "@/data/projects";
@@ -17,6 +18,8 @@ export interface ProjectTechStackProps {
 }
 
 export function ProjectTechStack({ techStack }: ProjectTechStackProps) {
+  const t = useTranslations("ProjectDetail");
+
   if (!techStack || techStack.length === 0) return null;
 
   return (
@@ -33,10 +36,10 @@ export function ProjectTechStack({ techStack }: ProjectTechStackProps) {
         </div>
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
-            Technologies & Architecture
+            {t("techTitle")}
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-            The technical stack and tools chosen to build a performant, scalable system
+            {t("techSubtitle")}
           </p>
         </div>
       </div>
@@ -83,4 +86,3 @@ export function ProjectTechStack({ techStack }: ProjectTechStackProps) {
 }
 
 export default ProjectTechStack;
-

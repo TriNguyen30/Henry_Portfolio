@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -29,6 +30,7 @@ function getServerSnapshot(): Theme {
 }
 
 export function ThemeToggle() {
+  const t = useTranslations("Theme");
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleTheme = useCallback(() => {
@@ -47,7 +49,7 @@ export function ThemeToggle() {
   }, []);
 
   const label =
-    theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+    theme === "dark" ? t("switchToLight") : t("switchToDark");
 
   return (
     <button

@@ -1,0 +1,153 @@
+{
+  "Metadata": {
+    "homeTitle": "Hồ sơ | {name}",
+    "homeDescription": "Hồ sơ của {name}, một {role} xây dựng ứng dụng web hiện đại, responsive bằng React, Next.js và TypeScript.",
+    "projectsTitle": "Dự án – {name} | {role}",
+    "projectsDescription": "Khám phá các dự án frontend nổi bật, ứng dụng web và trải nghiệm số do {name} phát triển.",
+    "projectTitle": "{project} – Case Study | {name}",
+    "projectNotFound": "Không tìm thấy dự án – {name}"
+  },
+  "Nav": {
+    "ariaLabel": "Điều hướng nổi",
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "stack": "Công nghệ",
+    "projects": "Dự án",
+    "contact": "Liên hệ"
+  },
+  "LanguageSwitcher": {
+    "label": "Ngôn ngữ",
+    "english": "English",
+    "vietnamese": "Tiếng Việt",
+    "switchTo": "Chuyển sang {language}"
+  },
+  "Theme": {
+    "switchToLight": "Chuyển sang giao diện sáng",
+    "switchToDark": "Chuyển sang giao diện tối"
+  },
+  "Hero": {
+    "greeting": "Xin chào! Tôi là {name}.",
+    "moreAbout": "Tìm hiểu thêm về tôi"
+  },
+  "About": {
+    "title": "Giới thiệu",
+    "downloadCv": "Tải CV"
+  },
+  "Stack": {
+    "title": "Công nghệ",
+    "viewAll": "Xem tất cả",
+    "modalSubtitle": "{count} công cụ & công nghệ tôi sử dụng",
+    "close": "Đóng danh sách công nghệ"
+  },
+  "Projects": {
+    "title": "Dự án nổi bật",
+    "subtitle": "Những trải nghiệm số, hệ thống thiết kế và giải pháp sản phẩm được chăm chút thủ công",
+    "allProjects": "Tất cả dự án",
+    "backToHome": "Về trang chủ",
+    "categories": {
+      "all": "Tất cả",
+      "webApp": "Ứng dụng web",
+      "academic": "Dự án học thuật",
+      "personal": "Dự án cá nhân"
+    },
+    "featured": "Nổi bật",
+    "detail": "Chi tiết",
+    "live": "Xem trực tiếp",
+    "previousProject": "Dự án trước",
+    "nextProject": "Dự án tiếp theo"
+  },
+  "ProjectDetail": {
+    "backToProjects": "Quay lại Dự án",
+    "home": "Trang chủ",
+    "breadcrumbProjects": "Dự án",
+    "productionReady": "Sẵn sàng vận hành",
+    "visitLive": "Xem ứng dụng trực tiếp",
+    "sourceCode": "Mã nguồn",
+    "discussProject": "Trao đổi dự án",
+    "specs": {
+      "role": "Vai trò",
+      "timeline": "Thời gian",
+      "team": "Đội ngũ",
+      "platform": "Nền tảng"
+    },
+    "defaultTeam": "Dự án độc lập",
+    "defaultPlatform": "Ứng dụng web",
+    "overviewTitle": "Tổng quan dự án",
+    "overviewSubtitle": "Hiểu rõ vấn đề, cách triển khai kiến trúc và kết quả đạt được",
+    "overviewCards": {
+      "problem": "Vấn đề",
+      "problemPill": "Thách thức",
+      "solution": "Giải pháp",
+      "solutionPill": "Kiến trúc & Cách tiếp cận",
+      "impact": "Tác động",
+      "impactPill": "Kết quả & Giá trị"
+    },
+    "featuresTitle": "Tính năng & Khả năng chính",
+    "featuresSubtitle": "Thiết kế cho hiệu năng, quy trình trực quan và thẩm mỹ hiện đại",
+    "featureReady": "Sẵn sàng vận hành",
+    "techTitle": "Công nghệ & Kiến trúc",
+    "techSubtitle": "Bộ công nghệ và công cụ được chọn để xây dựng hệ thống hiệu năng cao, dễ mở rộng",
+    "galleryTitle": "Trưng bày trực quan",
+    "gallerySubtitle": "Ảnh chụp độ phân giải cao và hướng dẫn giao diện tương tác",
+    "galleryImageAlt": "Ảnh chụp {project}",
+    "imagePreview": "Xem trước hình ảnh",
+    "closePreview": "Đóng xem trước",
+    "challengesTitle": "Thách thức kỹ thuật & Giải pháp",
+    "challengesSubtitle": "Những điểm nghẽn kiến trúc chính gặp phải trong quá trình phát triển và cách giải quyết",
+    "challenge": "Thách thức",
+    "solution": "Giải pháp",
+    "prevProject": "Dự án trước",
+    "nextProject": "Dự án tiếp theo",
+    "cta": {
+      "eyebrow": "Bạn muốn hợp tác cùng tôi?",
+      "title": "Hãy cùng xây dựng sản phẩm số tiếp theo của bạn.",
+      "description": "Dù bạn cần một {role} chuyên trách hay muốn trao đổi về ý tưởng kiến trúc, hộp thư của tôi luôn rộng mở.",
+      "button": "Liên hệ"
+    }
+  },
+  "Experience": {
+    "title": "Kinh nghiệm",
+    "linkedinProfile": "Hồ sơ LinkedIn"
+  },
+  "Contact": {
+    "title": "Liên hệ",
+    "directEmail": "Gửi email trực tiếp",
+    "heading": "Hãy cùng tạo nên điều tuyệt vời.",
+    "description": "Dù bạn có ý tưởng dự án, cơ hội hợp tác hay chỉ đơn giản muốn kết nối, tôi rất mong nhận được tin từ bạn. Hãy cùng tạo nên điều có ý nghĩa.",
+    "emailLabel": "EMAIL",
+    "copyEmail": "Sao chép email",
+    "telegramLabel": "TELEGRAM",
+    "telegramCta": "Trò chuyện trên Telegram",
+    "bookCall": "Đặt lịch gọi ↗",
+    "form": {
+      "name": "Họ tên",
+      "namePlaceholder": "VD: Nguyễn Văn A",
+      "email": "Email của bạn",
+      "emailPlaceholder": "VD: ban@example.com",
+      "subject": "Tiêu đề",
+      "subjectPlaceholder": "VD: Hợp tác dự án",
+      "message": "Nội dung tin nhắn",
+      "messagePlaceholder": "Hãy kể cho tôi nghe về dự án của bạn...",
+      "sending": "Đang gửi...",
+      "sent": "Đã gửi!",
+      "send": "Gửi tin nhắn",
+      "privacy": "Thông tin của bạn chỉ được sử dụng để phản hồi yêu cầu."
+    },
+    "errors": {
+      "copy": "Không thể sao chép email. Vui lòng sao chép thủ công.",
+      "generic": "Đã xảy ra lỗi. Vui lòng thử lại sau hoặc liên hệ trực tiếp qua email."
+    },
+    "success": "Cảm ơn bạn! Tin nhắn đã được gửi thành công. Tôi sẽ phản hồi sớm nhất có thể."
+  },
+  "Footer": {
+    "rights": "© {year} Bảo lưu mọi quyền.",
+    "designed": "Thiết kế & Phát triển tận tâm",
+    "top": "Lên đầu",
+    "backToTop": "Về đầu trang"
+  },
+  "NotFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn tìm kiếm không tồn tại hoặc đã được di chuyển.",
+    "backHome": "Về trang chủ"
+  }
+}

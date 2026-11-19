@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { Sparkles, Check } from "lucide-react";
 import { ProjectFeature } from "@/data/projects";
@@ -16,6 +17,8 @@ export interface ProjectFeaturesProps {
 }
 
 export function ProjectFeatures({ features }: ProjectFeaturesProps) {
+  const t = useTranslations("ProjectDetail");
+
   if (!features || features.length === 0) return null;
 
   return (
@@ -32,10 +35,10 @@ export function ProjectFeatures({ features }: ProjectFeaturesProps) {
         </div>
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
-            Key Features & Capabilities
+            {t("featuresTitle")}
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-            Designed for performance, intuitive workflows, and modern aesthetics
+            {t("featuresSubtitle")}
           </p>
         </div>
       </div>
@@ -80,7 +83,7 @@ export function ProjectFeatures({ features }: ProjectFeaturesProps) {
 
             <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-medium text-emerald-600">
               <Check className="size-3" />
-              <span>Production ready</span>
+              <span>{t("featureReady")}</span>
             </div>
           </motion.div>
         ))}
@@ -90,4 +93,3 @@ export function ProjectFeatures({ features }: ProjectFeaturesProps) {
 }
 
 export default ProjectFeatures;
-

@@ -1,8 +1,14 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
-import { AlertCircle, CheckCircle2, TrendingUp, Lightbulb } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  TrendingUp,
+  Lightbulb,
+} from "lucide-react";
 import { ProjectOverview as OverviewType } from "@/data/projects";
 import {
   sectionVariants,
@@ -15,29 +21,31 @@ export interface ProjectOverviewProps {
 }
 
 export function ProjectOverview({ overview }: ProjectOverviewProps) {
+  const t = useTranslations("ProjectDetail");
+
   if (!overview) return null;
 
   const cards = [
     {
-      title: "The Problem",
+      title: t("overviewCards.problem"),
       description: overview.problem,
       icon: AlertCircle,
       accent: "text-amber-600 bg-amber-50 border-amber-200/60",
-      pill: "Challenge",
+      pill: t("overviewCards.problemPill"),
     },
     {
-      title: "The Solution",
+      title: t("overviewCards.solution"),
       description: overview.solution,
       icon: Lightbulb,
       accent: "text-blue-600 bg-blue-50 border-blue-200/60",
-      pill: "Architecture & Approach",
+      pill: t("overviewCards.solutionPill"),
     },
     {
-      title: "The Impact",
+      title: t("overviewCards.impact"),
       description: overview.impact,
       icon: TrendingUp,
       accent: "text-emerald-600 bg-emerald-50 border-emerald-200/60",
-      pill: "Outcomes & Value",
+      pill: t("overviewCards.impactPill"),
     },
   ];
 
@@ -55,10 +63,10 @@ export function ProjectOverview({ overview }: ProjectOverviewProps) {
         </div>
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
-            Project Overview
+            {t("overviewTitle")}
           </h2>
           <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-            Understanding the problem space, architectural execution, and results
+            {t("overviewSubtitle")}
           </p>
         </div>
       </div>
@@ -101,4 +109,3 @@ export function ProjectOverview({ overview }: ProjectOverviewProps) {
 }
 
 export default ProjectOverview;
-

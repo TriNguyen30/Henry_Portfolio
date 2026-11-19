@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -20,7 +21,7 @@ import {
   SPRING_GENTLE,
 } from "@/lib/animations";
 import { personalData } from "@/data/personal";
-import { aboutData } from "@/data/about";
+import { useContent } from "@/components/providers/content-provider";
 
 const pillarIcons = {
   code: Code2,
@@ -29,17 +30,9 @@ const pillarIcons = {
   devices: MonitorSmartphone,
 } as const;
 
-export interface AboutSectionProps {
-  title?: string;
-  cvUrl?: string;
-  cvFileName?: string;
-}
-
-export function AboutSection({
-  title = aboutData.title,
-  cvUrl = personalData.cvUrl,
-  cvFileName = personalData.cvFileName,
-}: AboutSectionProps) {
+export function AboutSection() {
+  const t = useTranslations("About");
+  const { about } = useContent();
 
   return (
     <motion.section
@@ -55,7 +48,7 @@ export function AboutSection({
           variants={fadeInUpVariants}
           className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight"
         >
-          {title}
+          {t("title")}
         </motion.h2>
 
         <motion.a
@@ -63,14 +56,14 @@ export function AboutSection({
           whileHover={{ scale: 1.03, x: 2 }}
           whileTap={{ scale: 0.96 }}
           transition={SPRING_GENTLE}
-          href={cvUrl}
-          download={cvFileName}
+          href={personalData.cvUrl}
+          download={personalData.cvFileName}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 px-3.5 py-1.5 rounded-full transition-colors duration-200 hover:shadow-xs group shrink-0"
         >
           <Download className="size-3 text-zinc-400 group-hover:text-zinc-700 transition-colors" />
-          <span>Download CV</span>
+          <span>{t("downloadCv")}</span>
           <ArrowRight className="size-3 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
         </motion.a>
       </div>
@@ -80,7 +73,7 @@ export function AboutSection({
         variants={fadeInUpVariants}
         className="mt-6 space-y-3.5 text-zinc-600 text-xs sm:text-sm md:text-base leading-relaxed max-w-3xl"
       >
-        {aboutData.intro.map((paragraph, index) => (
+        {about.intro.map((paragraph, index) => (
           <p
             key={index}
             className={
@@ -112,7 +105,7 @@ export function AboutSection({
         variants={staggerContainer}
         className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-zinc-100"
       >
-        {aboutData.highlights.map((item) => (
+        {about.highlights.map((item) => (
           <motion.div
             key={item.label}
             variants={fadeInUpVariants}
@@ -135,7 +128,7 @@ export function AboutSection({
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="size-4 text-zinc-500" />
           <h3 className="text-sm font-semibold text-zinc-900">
-            {aboutData.focusHeading}
+            {about.focusHeading}
           </h3>
         </div>
 
@@ -143,7 +136,7 @@ export function AboutSection({
           variants={staggerContainer}
           className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
         >
-          {aboutData.pillars.map((pillar) => {
+          {about.pillars.map((pillar) => {
             const Icon = pillarIcons[pillar.icon];
 
             return (
@@ -178,7 +171,7 @@ export function AboutSection({
         variants={tagContainerVariants}
         className="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2.5 pt-6 mt-6 border-t border-zinc-100/80"
       >
-        {aboutData.principles.map((item) => (
+        {about.principles.map((item) => (
           <motion.div
             key={item}
             variants={tagVariants}

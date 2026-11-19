@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { ArrowRight, Briefcase } from "lucide-react";
-import { ExperienceItem, defaultExperiences } from "@/data/experience";
 import { personalData } from "@/data/personal";
+import { useContent } from "@/components/providers/content-provider";
 import {
   sectionVariants,
   fadeInUpVariants,
@@ -13,17 +13,10 @@ import {
   SPRING_GENTLE,
 } from "@/lib/animations";
 
-export function ExperienceSection({
-  title = "Experience",
-  linkText = "LinkedIn Profile",
-  linkHref = personalData.socials.linkedin,
-  items = defaultExperiences,
-}: {
-  title?: string;
-  linkText?: string;
-  linkHref?: string;
-  items?: ExperienceItem[];
-}) {
+export function ExperienceSection() {
+  const t = useTranslations("Experience");
+  const { experience } = useContent();
+
   return (
     <motion.section
       initial="hidden"
@@ -38,7 +31,7 @@ export function ExperienceSection({
           variants={fadeInUpVariants}
           className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight"
         >
-          {title}
+          {t("title")}
         </motion.h2>
 
         <motion.div
@@ -47,21 +40,24 @@ export function ExperienceSection({
           whileTap={{ scale: 0.96 }}
           transition={SPRING_GENTLE}
         >
-          <Link
-            href={linkHref}
+          <a
+            href={personalData.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 px-3.5 py-1.5 rounded-full transition-colors duration-200 hover:shadow-xs group"
           >
-            <span>{linkText}</span>
+            <span>{t("linkedinProfile")}</span>
             <ArrowRight className="size-3 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
+          </a>
         </motion.div>
       </div>
 
       {/* Timeline items */}
-      <motion.div variants={staggerContainer} className="mt-8 space-y-4 sm:space-y-5">
-        {items.map((item) => (
+      <motion.div
+        variants={staggerContainer}
+        className="mt-8 space-y-4 sm:space-y-5"
+      >
+        {experience.map((item) => (
           <motion.div
             key={item.id}
             variants={fadeInUpVariants}

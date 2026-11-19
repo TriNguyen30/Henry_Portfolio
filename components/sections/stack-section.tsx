@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, X } from "lucide-react";
 import {
@@ -18,7 +19,7 @@ import {
   SiCss,
   SiJavascript,
   SiCplusplus,
-  SiMysql,  
+  SiMysql,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import {
@@ -27,11 +28,8 @@ import {
   staggerContainer,
   SPRING_GENTLE,
 } from "@/lib/animations";
-import {
-  stackItems,
-  type StackItem,
-  type StackIconKey,
-} from "@/data/stack";
+import type { StackItem, StackIconKey } from "@/data/stack";
+import { useContent } from "@/components/providers/content-provider";
 
 const stackIcons: Record<
   StackIconKey,
@@ -125,15 +123,21 @@ export interface StackSectionProps {
 }
 
 export function StackSection({
-  title = "Stack",
-  linkText = "View All",
+  title,
+  linkText,
   previewCount = 8,
-  items = stackItems,
+  items,
 }: StackSectionProps) {
+  const t = useTranslations("Stack");
+  const { stack } = useContent();
   const [isOpen, setIsOpen] = useState(false);
   const isClient = useIsClient();
 
-  const previewItems = items.slice(0, previewCount);
+  const resolvedTitle = title ?? t("title");
+  const resolvedLinkText = linkText ?? t("viewAll");
+  const resolvedItems = items ?? stack;
+
+  const previewItems = resolvedItems.slice(0, previewCount);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -183,17 +187,17 @@ export function StackSection({
                     id="stack-modal-title"
                     className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight"
                   >
-                    {title}
+                    {resolvedTitle}
                   </h2>
                   <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-                    {items.length} tools & technologies I work with
+                    {t("modalSubtitle", { count: resolvedItems.length })}
                   </p>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  aria-label="Close stack"
+                  aria-label={t("close")}
                   className="shrink-0 size-9 rounded-full bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 text-zinc-600 hover:text-zinc-950 flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <X className="size-4" />
@@ -208,7 +212,7 @@ export function StackSection({
                   animate="visible"
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
                 >
-                  {items.map((item) => (
+                  {resolvedItems.map((item) => (
                     <StackCard key={item.id} item={item} />
                   ))}
                 </motion.div>
@@ -235,7 +239,7 @@ export function StackSection({
             variants={fadeInUpVariants}
             className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight"
           >
-            {title}
+            {resolvedTitle}
           </motion.h2>
 
           <motion.div
@@ -251,7 +255,7 @@ export function StackSection({
               aria-expanded={isOpen}
               className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 px-3.5 py-1.5 rounded-full transition-colors duration-200 hover:shadow-xs group cursor-pointer"
             >
-              <span>{linkText}</span>
+              <span>{resolvedLinkText}</span>
               <ArrowRight className="size-3 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </motion.div>

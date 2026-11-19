@@ -2,17 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "motion/react";
-import {
-  MapPin,
-  ArrowRight,
-} from "lucide-react";
-import {
-  FaLinkedinIn,
-  FaGithub,
-  FaFacebookF,
-} from "react-icons/fa6";
+import { MapPin, ArrowRight } from "lucide-react";
+import { FaLinkedinIn, FaGithub, FaFacebookF } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 import {
   sectionVariants,
   fadeInUpVariants,
@@ -22,34 +15,15 @@ import {
   tagVariants,
   SPRING_GENTLE,
 } from "@/lib/animations";
+import { Link } from "@/i18n/navigation";
 import { personalData } from "@/data/personal";
-import { heroSkills } from "@/data/skills";
+import { useContent } from "@/components/providers/content-provider";
 
-export interface HeroSectionProps {
-  status?: string;
-  name?: string;
-  role?: string;
-  bio?: string;
-  location?: string;
-  avatarUrl?: string;
-  skills?: string[];
-  socials?: {
-    linkedin?: string;
-    github?: string;
-    facebook?: string;
-  };
-}
+export function HeroSection() {
+  const t = useTranslations("Hero");
+  const { personal, heroSkills } = useContent();
+  const { name, avatarUrl, socials } = personalData;
 
-export function HeroSection({
-  status = personalData.status,
-  name = personalData.name,
-  role = personalData.role,
-  bio = personalData.bio,
-  location = personalData.location,
-  avatarUrl = personalData.avatarUrl,
-  skills = heroSkills,
-  socials = personalData.socials,
-}: HeroSectionProps) {
   return (
     <motion.section
       initial="hidden"
@@ -70,7 +44,7 @@ export function HeroSection({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>{status}</span>
+          <span>{personal.status}</span>
         </motion.div>
 
         {/* Social Icons */}
@@ -81,7 +55,7 @@ export function HeroSection({
               whileTap={{ scale: 0.94 }}
               transition={SPRING_GENTLE}
             >
-              <Link
+              <a
                 href={socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -89,7 +63,7 @@ export function HeroSection({
                 className="flex p-2 rounded-lg border border-zinc-200/70 text-zinc-500 hover:text-[#0A66C2] hover:border-zinc-300 hover:bg-zinc-50 transition-colors duration-200"
               >
                 <FaLinkedinIn className="size-4" />
-              </Link>
+              </a>
             </motion.div>
           )}
 
@@ -99,7 +73,7 @@ export function HeroSection({
               whileTap={{ scale: 0.94 }}
               transition={SPRING_GENTLE}
             >
-              <Link
+              <a
                 href={socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -107,7 +81,7 @@ export function HeroSection({
                 className="flex p-2 rounded-lg border border-zinc-200/70 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 hover:bg-zinc-50 transition-colors duration-200"
               >
                 <FaGithub className="size-4" />
-              </Link>
+              </a>
             </motion.div>
           )}
 
@@ -117,7 +91,7 @@ export function HeroSection({
               whileTap={{ scale: 0.94 }}
               transition={SPRING_GENTLE}
             >
-              <Link
+              <a
                 href={socials.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -125,7 +99,7 @@ export function HeroSection({
                 className="flex p-2 rounded-lg border border-zinc-200/70 text-zinc-500 hover:text-[#1877F2] hover:border-zinc-300 hover:bg-zinc-50 transition-colors duration-200"
               >
                 <FaFacebookF className="size-4" />
-              </Link>
+              </a>
             </motion.div>
           )}
         </motion.div>
@@ -168,14 +142,14 @@ export function HeroSection({
           variants={fadeInUpVariants}
           className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight mt-6"
         >
-          Hi! I&apos;m {name}.
+          {t("greeting", { name })}
         </motion.h2>
 
         <motion.h1
           variants={fadeInUpVariants}
           className="text-2xl sm:text-4xl md:text-[38px] font-extrabold text-zinc-950 tracking-tight mt-1.5 leading-snug"
         >
-          {role}
+          {personal.role}
         </motion.h1>
 
         {/* Bio */}
@@ -183,7 +157,7 @@ export function HeroSection({
           variants={fadeInUpVariants}
           className="max-w-4xl text-xs sm:text-sm md:text-base text-zinc-500 leading-relaxed mt-4 font-normal"
         >
-          {bio}
+          {personal.bio}
         </motion.p>
       </div>
 
@@ -194,7 +168,7 @@ export function HeroSection({
       >
         <div className="flex items-center gap-1.5 text-xs text-zinc-400">
           <MapPin className="size-3.5 text-zinc-400 shrink-0" />
-          <span>{location}</span>
+          <span>{personal.location}</span>
         </div>
 
         <motion.div
@@ -206,7 +180,7 @@ export function HeroSection({
             href="#about"
             className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/60 px-4 py-2 rounded-full transition-colors duration-200 hover:shadow-xs group"
           >
-            <span>More about Me</span>
+            <span>{t("moreAbout")}</span>
             <ArrowRight className="size-3 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </motion.div>
@@ -217,7 +191,7 @@ export function HeroSection({
         variants={tagContainerVariants}
         className="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-3 pt-6 mt-2 border-t border-zinc-100/80"
       >
-        {skills.map((skill, index) => (
+        {heroSkills.map((skill, index) => (
           <motion.div
             key={index}
             variants={tagVariants}

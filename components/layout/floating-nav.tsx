@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { Home, User, Layers, LayoutGrid, Mail } from "lucide-react";
 import { SPRING_GENTLE } from "@/lib/animations";
+import { Link, usePathname } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 export interface NavItem {
   id: string;
@@ -15,14 +16,6 @@ export interface NavItem {
   href: string;
 }
 
-const defaultNavItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home, href: "/#home" },
-  { id: "about", label: "About", icon: User, href: "/#about" },
-  { id: "stack", label: "Stack", icon: Layers, href: "/#stack" },
-  { id: "projects", label: "Projects", icon: LayoutGrid, href: "/#projects" },
-  { id: "contact", label: "Contact", icon: Mail, href: "/#contact" },
-];
-
 export interface FloatingNavProps {
   items?: NavItem[];
   activeId?: string;
@@ -30,14 +23,34 @@ export interface FloatingNavProps {
 }
 
 export function FloatingNav({
-  items = defaultNavItems,
+  items,
   activeId: controlledActiveId,
   className = "",
 }: FloatingNavProps) {
+  const t = useTranslations("Nav");
   const pathname = usePathname();
   const isHome = pathname === "/";
+
+  const defaultItems = useMemo<NavItem[]>(
+    () => [
+      { id: "home", label: t("home"), icon: Home, href: "/#home" },
+      { id: "about", label: t("about"), icon: User, href: "/#about" },
+      { id: "stack", label: t("stack"), icon: Layers, href: "/#stack" },
+      {
+        id: "projects",
+        label: t("projects"),
+        icon: LayoutGrid,
+        href: "/#projects",
+      },
+      { id: "contact", label: t("contact"), icon: Mail, href: "/#contact" },
+    ],
+    [t]
+  );
+
+  const navItems = items ?? defaultItems;
+
   const [activeTabState, setActiveTabState] = useState<string>(
-    controlledActiveId || items[0]?.id || "home"
+    controlledActiveId || navItems[0]?.id || "home"
   );
   const activeTab = controlledActiveId ?? activeTabState;
 
@@ -48,8 +61,8 @@ export function FloatingNav({
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
 
-      for (let i = items.length - 1; i >= 0; i--) {
-        const item = items[i];
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const item = navItems[i];
         const el = document.getElementById(item.id);
         if (el && el.offsetTop <= scrollPosition) {
           setActiveTabState(item.id);
@@ -60,18 +73,18 @@ export function FloatingNav({
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [controlledActiveId, isHome, items]);
+  }, [controlledActiveId, isHome, navItems]);
 
   return (
     <motion.nav
-      aria-label="Floating navigation"
+      aria-label={t("ariaLabel")}
       initial={{ y: 50, opacity: 0, x: "-50%" }}
       animate={{ y: 0, opacity: 1, x: "-50%" }}
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       className={`fixed bottom-6 left-1/2 z-50 ${className}`}
     >
       <div className="floating-dock flex items-center gap-1.5 p-1.5 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.14)]">
-        {items.map((item) => {
+        {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = isHome && activeTab === item.id;
 
@@ -111,6 +124,13 @@ export function FloatingNav({
             </Link>
           );
         })}
+
+        <span
+          aria-hidden="true"
+          className="mx-0.5 h-6 w-px bg-zinc-200/80"
+        />
+
+        <LanguageSwitcher />
 
         <span
           aria-hidden="true"

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "motion/react";
 import { Images, Maximize2, X } from "lucide-react";
 import { ProjectGalleryItem } from "@/data/projects";
@@ -19,6 +20,7 @@ export interface ProjectGalleryProps {
 }
 
 export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
+  const t = useTranslations("ProjectDetail");
   const [selectedImage, setSelectedImage] = useState<ProjectGalleryItem | null>(
     null
   );
@@ -42,6 +44,9 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
 
   if (!gallery || gallery.length === 0) return null;
 
+  const imageAlt = (item: ProjectGalleryItem) =>
+    item.caption || t("galleryImageAlt", { project: title ?? "" });
+
   return (
     <>
       <motion.section
@@ -57,10 +62,10 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
           </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight">
-              Visual Showcase
+              {t("galleryTitle")}
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-              High-resolution screens and interactive interface walkthroughs
+              {t("gallerySubtitle")}
             </p>
           </div>
         </div>
@@ -85,7 +90,7 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100">
                 <Image
                   src={item.url}
-                  alt={item.caption || title || "Project Screenshot"}
+                  alt={imageAlt(item)}
                   fill
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-104"
                 />
@@ -134,13 +139,13 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
                   onClick={(e) => e.stopPropagation()}
                   role="dialog"
                   aria-modal="true"
-                  aria-label={selectedImage.title || "Image preview"}
+                  aria-label={selectedImage.title || t("imagePreview")}
                   className="relative my-auto w-full max-w-5xl max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] overflow-y-auto bg-zinc-950 rounded-2xl shadow-2xl border border-zinc-800"
                 >
                   {/* Close Button */}
                   <button
                     onClick={() => setSelectedImage(null)}
-                    aria-label="Close preview"
+                    aria-label={t("closePreview")}
                     className="absolute top-4 right-4 z-10 size-9 rounded-full bg-zinc-900/80 hover:bg-zinc-800 text-white flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <X className="size-4.5" />
@@ -176,4 +181,3 @@ export function ProjectGallery({ gallery, title }: ProjectGalleryProps) {
 }
 
 export default ProjectGallery;
-

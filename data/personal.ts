@@ -4,13 +4,12 @@ export interface PersonalSocials {
   facebook: string;
 }
 
-export interface PersonalInfo {
+/**
+ * Locale-independent profile details. Translatable copy (role, bio, …) lives
+ * in `data/content` so it can change with the active language.
+ */
+export interface PersonalProfile {
   name: string;
-  role: string;
-  status: string;
-  availabilityNote: string;
-  bio: string;
-  location: string;
   avatarUrl: string;
   email: string;
   cvUrl: string;
@@ -18,13 +17,16 @@ export interface PersonalInfo {
   socials: PersonalSocials;
 }
 
-export const personalData: PersonalInfo = {
+export interface PersonalContent {
+  role: string;
+  status: string;
+  availabilityNote: string;
+  bio: string;
+  location: string;
+}
+
+export const personalData: PersonalProfile = {
   name: "Nguyen Cong Tri",
-  role: "Frontend Developer",
-  status: "Open to opportunities",
-  availabilityNote: "Open to Frontend Developer opportunities",
-  bio: "I am a Frontend Developer passionate about building modern, responsive, and user-friendly web applications using React, Next.js, and TypeScript.",
-  location: "Ho Chi Minh City, Vietnam",
   avatarUrl: "/images/Avatar.jpg",
   email: "trinc304@gmail.com",
   cvUrl: "/pdf/CV_NguyenCongTri.pdf",

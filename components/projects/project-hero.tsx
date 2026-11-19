@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import {
   ArrowLeft,
@@ -15,7 +15,8 @@ import {
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { Project } from "@/data/projects";
-import { personalData } from "@/data/personal";
+import { useContent } from "@/components/providers/content-provider";
+import { Link } from "@/i18n/navigation";
 import {
   sectionVariants,
   fadeInUpVariants,
@@ -29,25 +30,30 @@ export interface ProjectHeroProps {
 }
 
 export function ProjectHero({ project }: ProjectHeroProps) {
+  const t = useTranslations("ProjectDetail");
+  const projectT = useTranslations("Projects");
+  const { personal } = useContent();
+  const categoryLabel = projectT(`categories.${project.category}`);
+
   const specs = [
     {
-      label: "Role",
-      value: project.role || personalData.role,
+      label: t("specs.role"),
+      value: project.role || personal.role,
       icon: UserCheck,
     },
     {
-      label: "Timeline",
+      label: t("specs.timeline"),
       value: project.timeline || "2024",
       icon: Calendar,
     },
     {
-      label: "Team",
-      value: project.team || "Independent Project",
+      label: t("specs.team"),
+      value: project.team || t("defaultTeam"),
       icon: Users,
     },
     {
-      label: "Platform",
-      value: project.platform || "Web Application",
+      label: t("specs.platform"),
+      value: project.platform || t("defaultPlatform"),
       icon: Monitor,
     },
   ];
@@ -69,16 +75,19 @@ export function ProjectHero({ project }: ProjectHeroProps) {
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200/80 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50 transition-colors shadow-2xs font-medium"
         >
           <ArrowLeft className="size-3.5" />
-          <span>Back to Projects</span>
+          <span>{t("backToProjects")}</span>
         </Link>
 
         <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
           <Link href="/" className="hover:text-zinc-700 transition-colors">
-            Home
+            {t("home")}
           </Link>
           <span>/</span>
-          <Link href="/#projects" className="hover:text-zinc-700 transition-colors">
-            Projects
+          <Link
+            href="/#projects"
+            className="hover:text-zinc-700 transition-colors"
+          >
+            {t("breadcrumbProjects")}
           </Link>
           <span>/</span>
           <span className="text-zinc-700 font-medium truncate max-w-[120px] sm:max-w-[200px]">
@@ -95,12 +104,12 @@ export function ProjectHero({ project }: ProjectHeroProps) {
           className="flex flex-wrap items-center gap-2"
         >
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-zinc-900 text-white shadow-xs">
-            {project.category}
+            {categoryLabel}
           </span>
 
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200/60">
             <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Production Ready</span>
+            <span>{t("productionReady")}</span>
           </span>
 
           {project.timeline && (
@@ -138,15 +147,15 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               whileTap={{ scale: 0.98 }}
               transition={SPRING_GENTLE}
             >
-              <Link
+              <a
                 href={project.projectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs sm:text-sm font-semibold transition-colors shadow-xs"
               >
-                <span>Visit Live Application</span>
+                <span>{t("visitLive")}</span>
                 <ExternalLink className="size-3.5" />
-              </Link>
+              </a>
             </motion.div>
           )}
 
@@ -156,15 +165,15 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               whileTap={{ scale: 0.98 }}
               transition={SPRING_GENTLE}
             >
-              <Link
+              <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200/80 text-zinc-900 text-xs sm:text-sm font-semibold border border-zinc-200/70 transition-colors"
               >
                 <FaGithub className="size-4" />
-                <span>Source Code</span>
-              </Link>
+                <span>{t("sourceCode")}</span>
+              </a>
             </motion.div>
           )}
 
@@ -178,7 +187,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-zinc-50 hover:bg-zinc-100 text-zinc-700 hover:text-zinc-950 text-xs sm:text-sm font-medium border border-zinc-200/70 transition-colors"
             >
               <MessageSquare className="size-3.5 text-zinc-500" />
-              <span>Discuss Project</span>
+              <span>{t("discussProject")}</span>
             </Link>
           </motion.div>
         </motion.div>

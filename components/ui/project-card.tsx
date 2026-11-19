@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ArrowRight, Star } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { Link } from "@/i18n/navigation";
 import { SPRING_GENTLE } from "@/lib/animations";
 
 export type { Project };
@@ -16,7 +17,9 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, className = "" }: ProjectCardProps) {
+  const t = useTranslations("Projects");
   const prefersReducedMotion = useReducedMotion();
+  const categoryLabel = t(`categories.${project.category}`);
 
   return (
     <motion.div
@@ -45,7 +48,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-50 to-zinc-100 text-zinc-400">
               <span className="text-xs font-medium tracking-wide uppercase">
-                {project.category}
+                {categoryLabel}
               </span>
             </div>
           )}
@@ -78,7 +81,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
               >
                 <Star className="size-3 fill-current" />
               </motion.span>
-              Featured
+              {t("featured")}
             </motion.span>
           )}
 
@@ -94,7 +97,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-zinc-400">
-              {project.category}
+              {categoryLabel}
             </span>
           </div>
 
@@ -130,20 +133,20 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
             href={`/projects/${project.id}`}
             className="text-xs font-semibold text-zinc-900 hover:text-zinc-600 inline-flex items-center gap-1 group-hover:underline underline-offset-4"
           >
-            <span>Detail</span>
+            <span>{t("detail")}</span>
             <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
           {project.projectUrl && (
-            <Link
+            <a
               href={project.projectUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-medium text-zinc-500 hover:text-zinc-900 inline-flex items-center gap-0.5"
             >
-              <span>Live</span>
+              <span>{t("live")}</span>
               <ArrowUpRight className="size-3" />
-            </Link>
+            </a>
           )}
         </div>
       </div>
